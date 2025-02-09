@@ -1,19 +1,18 @@
 class Solution {
 public:
+    void reverse(vector<int> &nums,int i,int j){
+        if(i>=j) return;
+        int temp =nums[i];
+        nums[i] =nums[j];
+        nums[j] = temp;
+        reverse(nums,i+1,j-1);
+    }
     void rotate(vector<int>& nums, int k) {
+        if(nums.size()==1) return;
         int n =nums.size();
-        deque<int> q;
-        for(int i=0;i<n;i++){
-            q.push_back(nums[i]);
-        }
-        while(k--){
-            int a =q.back();
-            q.pop_back();
-            q.push_front(a);
-        }
-        for(int i=0;i<n;i++){
-            nums[i] =q.front();
-            q.pop_front();
-        }
+        k =k%n;
+        reverse(nums,0,n-k-1);
+        reverse(nums,n-k,n-1);
+        reverse(nums,0,n-1);
     }
 };
