@@ -1,17 +1,16 @@
 class Solution {
 public:
     typedef pair<int, int> P;
-    struct cmp {
-        bool operator()(P p1, P p2) {
-            if (p1.first != p2.first) {
-                return p1.first > p2.first;
-            } 
-            return  p1.second < p2.second;
-        }
-    };
     vector<int> frequencySort(vector<int>& nums) {
+        const auto cmp = [](P a, P b){
+            if(a.first != b.first){
+                return a.first > b.first;
+            }
+            return a.second<b.second;
+        };
+
         unordered_map<int, int> mp;
-        priority_queue < P, vector<P>, cmp> pq;
+        priority_queue < P, vector<P>, decltype(cmp)> pq;
         int n = nums.size();
         for (int i = 0; i < n; i++) {
             mp[nums[i]]++;
