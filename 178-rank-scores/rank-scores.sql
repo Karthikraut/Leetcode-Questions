@@ -1,0 +1,2 @@
+/* We will find the scores which are greater than the current scores */
+SELECT s1.score, (SELECT COUNT(DISTINCT score) FROM  scores s2 WHERE s2.score >= s1.score) AS `rank` from scores s1 ORDER BY `rank`;
